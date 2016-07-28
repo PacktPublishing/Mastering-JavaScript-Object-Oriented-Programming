@@ -1,0 +1,64 @@
+<html>
+<head>
+<script>
+var person;
+var txtName;
+var txtSurname;
+var btnSave;
+var divMessage;
+
+function Person(name, surname) {
+  this.name = name;
+  this.surname = surname;
+}
+
+function savePerson(person) {
+  //Process data
+  console.log("Saved!");
+}
+
+window.onload = function() {
+  txtName = document.getElementById("txtName");
+  txtSurname = document.getElementById("txtSurname");
+  btnSave = document.getElementById("btnSave");
+  btnReset = document.getElementById("btnReset"); 
+  divMessage = document.getElementById("divMessage");
+  
+  person = new Person("John", "Smith");
+
+  txtName.value = person.name;
+  txtSurname.value = person.surname;
+  
+  btnSave.onclick = function() {
+    if (txtName.value && txtSurname.value) {
+      person.name = txtName.value;
+      person.surname = txtSurname.value;
+      
+      savePerson(person);
+      divMessage.innerHTML = "Saved!";    
+    } else {
+      divMessage.innerHTML = "Please, enter name and surname!";
+    }
+  };
+  
+  btnReset.onclick = function() {
+    txtName.value = "";
+    txtSurname.value = "";
+    divMessage.innerHTML = "";
+
+    person.name = "";    
+    person.surname = "";    
+  };
+};
+</script>
+</head>
+<body>
+
+<label>Name &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="txtName"></label><br/>
+<label>Surname <input type="text" id="txtSurname"></label><br/>
+<div id="divMessage"></div>
+<button id="btnSave">Save</button>
+<button id="btnReset">Reset</button>
+
+</body>
+</html>

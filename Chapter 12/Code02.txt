@@ -1,0 +1,50 @@
+var Mediator = function() {
+
+	var colleagues = {};
+
+	return {
+		register: function(colleague) {
+			colleagues[colleague.name] =  colleague;
+			 colleague.mediator = this;
+		},
+
+		send: function(message, sender, receiver) {
+			if (receiver) {
+				receiver.receive(message, sender);
+			} else {
+				for (key in colleagues) {
+					if (colleagues[key] != sender) {
+						colleagues[key].receive(message, sender);
+					}
+				}
+			}
+		}
+	};
+};
+
+
+var Colleague = function(name) {
+	this.name = name;
+	this.mediator = null;
+};
+
+Colleague.prototype.send = function(message, receiver) {
+	this.mediator.send(message, this, receiver);
+};
+
+Colleague.prototype.receive = function(message, sender) {
+	//process the message
+};
+
+
+var mediator = new Mediator();
+var johnSmith = new Colleague("John");
+var marioRossi = new Colleague("Mario");
+
+mediator.register(johnSmith);
+mediator.register(marioRossi);
+
+
+johnSmith.send("Hello!", marioRossi);
+
+johnSmith.send("Hello!");

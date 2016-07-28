@@ -1,0 +1,24 @@
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof exports === 'object') {
+        module.exports = factory();
+    } else {
+        root.returnExports = factory();
+    }
+}(this, function () {
+	var pi = 3.14;
+
+	function circumference(radius) {
+		return 2*pi*radius;
+	}
+
+	function circleArea(radius) {
+		return pi*radius*radius;
+	}
+
+	return {
+		 calculateCircumference:  circumference,
+		 calculateCircleArea:   circleArea
+	};
+}));

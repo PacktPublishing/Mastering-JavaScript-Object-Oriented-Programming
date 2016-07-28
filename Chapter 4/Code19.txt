@@ -1,0 +1,19 @@
+class Person {
+	constructor(name, surname) {
+		this.name = name;
+		this.surname = surname;
+	}
+}
+
+var myMixin = {
+	getFullName: function() { 
+		return this.name + " " + this.surname;
+	}
+};
+
+
+augment(Person.prototype, myMixin);
+
+var johnSmith = new Person("John", "Smith");
+
+console.log(johnSmith.getFullName());		//result: "John Smith"

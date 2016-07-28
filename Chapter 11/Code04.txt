@@ -1,0 +1,97 @@
+function Order(customerId) {
+	this.customerId =  customerId;
+	this.dateTime = new Date();
+	this.totalAmount = 0;
+	this.items = [];
+}
+
+
+var OrderManager = (function () {
+    var discounters = [];
+    
+    function OrderManager() {}
+
+    OrderManager.prototype.createOrder = function (customerId) {
+        this.order = new Order(customerId);
+    };
+
+    OrderManager.prototype.addItem = function (item) {
+        this.order.items.push(item);
+        this.order.totalAmount = this.order.totalAmount + item.price;
+    };
+
+    OrderManager.prototype.sendOrder = function () {
+        if (this.isValid(this.order)) {
+          this.applyDiscount(this.order);
+          var orderSender = new OrderSender();
+          orderSender.send(order);
+        }
+        else {
+            handleError({ message: "Not valid order!" });
+        }
+    };
+
+    OrderManager.prototype.isValid = function (order) {
+        return order.items.length > 0;
+    };
+    
+    OrderManager.prototype.registerDiscounter = function(discounter) {
+      discounters.push(discounter);
+    };
+    
+    OrderManager.prototype.applyDiscount = function (order) {
+        var i;
+        
+        for (i=0; i < discounters.length; i++) {
+          if (discounters[i].isApplicable(order)) {
+            discounters[i].apply(order);
+            break
+          }
+        }
+    };
+
+    return OrderManager;
+}());
+
+
+var bronzeDiscounter = {
+  isApplicable: function(order) {
+    var itemsCount = order.items.length;
+
+    return (itemsCount >= 10 && itemsCount < 20)
+  },
+  apply: function(order) {
+    order.totalAmount = order.totalAmount - order.totalAmount * 10 / 100;
+  }
+};
+
+var silverDiscounter = {
+  isApplicable: function(order) {
+    var itemsCount = order.items.length;
+
+    return (itemsCount >= 20 && itemsCount < 30)
+  },
+  apply: function(order) {
+    order.totalAmount = order.totalAmount - order.totalAmount * 30 / 100;
+  }
+};
+
+var goldDiscounter = {
+  isApplicable: function(order) {
+    var itemsCount = order.items.length;
+
+    return (itemsCount >= 30)
+  },
+  apply: function(order) {
+    order.totalAmount = order.totalAmount - order.totalAmount * 50 / 100;
+  }
+};
+
+
+function handleResponse(response) {
+    console.log(JSON.stringify(response));
+}
+
+function handleError(error) {
+    console.log(error.message);
+}

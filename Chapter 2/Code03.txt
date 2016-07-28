@@ -1,0 +1,17 @@
+function Company(name) {
+	var employees = [];
+
+	this.name = name;
+
+	this.prototype.getEmployees = function() { 
+			return employees;
+			};
+	this.prototype.addEmployee = function(employee) { 
+			employees.push(employee);
+			};
+	this.prototype.sortEmployeesByName = function() {
+			...
+			};
+}
+
+var company = new Company("ACME Inc.");

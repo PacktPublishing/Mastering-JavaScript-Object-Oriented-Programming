@@ -1,0 +1,47 @@
+<html>
+<head>
+<script>
+class Binder {
+	bindTo(dataSourceObj, dataSourceProperty, dataTargetObj, dataTargetProperty) {
+      var bindHandler = {
+			set: function(target, property, newValue) {
+				if (property == dataSourceProperty) {
+					target[dataSourceProperty] = newValue;
+
+					dataTargetObj[dataTargetProperty] = newValue;
+				}
+			}
+		};
+		return new Proxy(dataSourceObj, bindHandler);
+	}
+}
+
+class Person {
+  constructor(name, surname) {
+    this.name = name;
+    this.surname = surname;
+  }
+}
+
+window.onload = function() {
+
+var person = new Person("John", "Smith");
+var txtName = document.getElementById("txtName");
+var binder = new Binder();
+
+var proxiedPerson = binder.bindTo(person, "name", txtName, "value");
+
+setTimeout(function() {
+	proxiedPerson.name = "Mario";
+	}, 5000);
+	
+};
+</script>
+</head>
+<body>
+
+<label>Name &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="txtName"></label><br/>
+<button id="btnSave">Save</button>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+class SoftwareHouse {
+	constructor() {
+		this.employees = [];
+	}
+
+	hire(dev) {
+		if (dev && dev["writeCode"] && dev["writeCode"] instanceof Function) {
+			this.employees.push(dev);
+			} else {
+				throw new Error("The argument do not implements writeCode method")
+			}
+	}
+}

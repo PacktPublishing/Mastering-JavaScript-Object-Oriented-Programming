@@ -1,0 +1,98 @@
+<html>
+<head>
+<script>
+var Model = (function () {
+    function Model(name, surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+    return Model;
+}());
+
+var View = (function () {
+    function View(model, controller) {
+        var self = this;
+        var txtName = document.getElementById("txtName");
+        var txtSurname = document.getElementById("txtSurname");
+        var btnSave = document.getElementById("btnSave");
+        var btnReset = document.getElementById("btnReset");
+        self.controller = controller;
+        txtName.value = model.name;
+        txtSurname.value = model.surname;
+        btnSave.onclick = function () {
+            self.save();
+        };
+        btnReset.onclick = function () {
+            self.clear();
+        };
+    }
+    View.prototype.clear = function () {
+        var txtName = document.getElementById("txtName");
+        var txtSurname = document.getElementById("txtSurname");
+        var divMessage = document.getElementById("divMessage");
+        txtName.value = "";
+        txtSurname.value = "";
+        divMessage.innerHTML = "";
+    };
+    Object.defineProperty(View.prototype, "message", {
+        set: function (message) {
+            var divMessage = document.getElementById("divMessage");
+            divMessage.innerHTML = message;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    View.prototype.save = function () {
+        var txtName = document.getElementById("txtName");
+        var txtSurname = document.getElementById("txtSurname");
+        var data = {
+            name: txtName.value,
+            surname: txtSurname.value
+        };
+        this.controller.save(data);
+    };
+    return View;
+}());
+
+
+var Controller = (function () {
+    function Controller() {
+    }
+    Controller.prototype.initialize = function (model, view) {
+        this.model = model;
+        this.view = view;
+    };
+    Controller.prototype.save = function (data) {
+      if (data.name && data.surname) {
+        this.model.name = data.name;
+        this.model.surname = data.surname;
+        
+        this.view.message = "Saved!";      
+      } else {
+        this.view.message = "Please, enter name and surname!";
+      }
+    };
+    return Controller;
+}());
+
+
+window.onload = function() {
+  var model = new Model("John", "Smith");
+  var controller = new Controller();
+  var view = new View(model, controller);
+  
+  controller.initialize(model, view);
+};
+
+</script>
+</head>
+<body>
+
+<label>Name <input type="text" id="txtName"></label><br/>
+<label>Surname <input type="text" id="txtSurname"></label><br/>
+<div id="divMessage"></div>
+<button id="btnSave">Save</button>
+<button id="btnReset">Reset</button>
+
+</body>
+</html>

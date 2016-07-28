@@ -1,0 +1,27 @@
+function Discounter(min, max, discountPercentage) {
+  this.min = min;
+  this.max = max;
+  this.discountPercentage = discountPercentage;
+}
+
+Discounter.prototype.isApplicable = function(order) {
+    var itemsCount = order.items.length;
+
+    return (itemsCount >= this.min && itemsCount < this.max)
+};
+
+Discounter.prototype.apply = function(order) {
+    order.totalAmount = order.totalAmount - order.totalAmount * discountPercentage / 100;
+};
+
+
+
+function AmountDiscounter(min, max, discountPercentage) {
+  Discounter.apply(this, arguments);
+}
+
+AmountDiscounter.prototype.isApplicable = function(order) {
+    var orderAmount = order.totalAmount;
+
+    return (orderAmount >= min && orderAmount < max)
+};

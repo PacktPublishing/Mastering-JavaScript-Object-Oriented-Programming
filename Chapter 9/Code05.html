@@ -1,0 +1,24 @@
+<html>
+<head>
+<script>
+function myButton(id, standardText, clickedText) {
+  this.id = id;
+  this.standardText = standardText;
+  this.clickedText = clickedText;
+  
+  var btn = document.getElementById(this.id);
+  btn.innerHTML = this.standardText; 
+  
+  btn.addEventListener("click", 
+							() => { btn.innerHTML= this.clickedText; });
+}
+
+window.onload = function() {
+  var myBtn = new myButton("btn", "Click me!", "Clicked!");
+};
+</script>
+</head>
+<body>
+<button id="btn"></button>
+</body>
+</html>

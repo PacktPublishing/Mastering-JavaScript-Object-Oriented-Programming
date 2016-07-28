@@ -1,0 +1,18 @@
+var myApplication = {
+	version: "1.0",
+	name: "My Application",
+	init: function() {/*...*/}
+};
+
+myApplication.config: {};
+myApplication.config.ui: {
+						backgroundColor: "green",
+						fontSize: 12
+						};
+myApplication.config.localization: {
+									language: "english",
+									dateFormat: "MM-dd-yyyy"
+									};
+									
+myApplication.config.localization.language: "italian",
+myApplication.config.localization.dateFormat = "dd-MM-yyyy";

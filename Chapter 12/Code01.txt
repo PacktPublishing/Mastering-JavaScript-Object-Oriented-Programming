@@ -1,0 +1,8 @@
+function Facade() {}
+
+Facade.prototype.getElement = function(selector) {
+	return document.querySelector(selector);
+};
+
+var facade = new Facade();
+var myElement = facade.getElement(".class");

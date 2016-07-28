@@ -1,0 +1,12 @@
+function LoggedCalculator() {
+	Calculator.apply(this, arguments);
+}
+
+
+LoggedCalculator.prototype.sum = function(x, y) {
+		console.log("Calling sum on " + x + " and " + y);
+		var result =  Calculator.prototype.sum(x, y);
+
+		console.log("Result of sum is " + result);
+		return result;
+	};

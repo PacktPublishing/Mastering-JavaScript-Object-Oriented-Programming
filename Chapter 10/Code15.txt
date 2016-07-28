@@ -1,0 +1,18 @@
+function getFileContent(moduleName) { /*...*/ }
+
+function loadModule(moduleName) {
+	var moduleCode;
+	var module;
+
+	if (moduleName in loadModule.cache) {
+		module =  loadModule.cache[moduleName];
+	} else {
+		moduleCode = new Function("return " + getFileContent(moduleName));
+		module = moduleCode();
+		loadModule.cache[moduleName] = module;
+	}
+
+	return module;
+}
+
+loadModule.cache = {};

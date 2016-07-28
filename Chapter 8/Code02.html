@@ -1,0 +1,37 @@
+<html>
+<head>
+<script>
+window.onload = function() {
+  var person;
+  var txtName = document.getElementById("txtName");
+  var txtSurname = document.getElementById("txtSurname");
+  
+  function Person(name, surname) {
+    this.name = name;
+    this.surname = surname;
+  }
+  
+  person = new Person("John", "Smith");
+  
+  txtName.value = person.name;
+  txtSurname.value = person.surname;
+  
+  txtName.onchange = function() {
+    person.name = txtName.value;
+  };
+  
+  txtSurname.onchange = function() {
+    person.surname = txtSurname.value;
+  };
+  
+};
+</script>
+</head>
+<body>
+
+<label>Name &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="txtName"></label><br/>
+<label>Surname <input type="text" id="txtSurname"></label><br/>
+<button id="btnSave">Save</button>
+
+</body>
+</html>

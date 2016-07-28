@@ -1,0 +1,82 @@
+<html>
+<head>
+<script>
+function httpGet(url) {
+	return new Promise(function(resolve, reject) {
+		var httpReq = new XMLHttpRequest();
+
+		httpReq.onreadystatechange = function() {
+			var data;
+    
+      if (httpReq.readyState == 4) {
+  			if (httpReq.status == 200) {
+  				data = JSON.parse(httpReq.responseText);
+  				resolve(data);
+  			} else {
+  				reject(new Error(httpReq.statusText));
+  			}
+      }
+		};
+ 
+		httpReq.open("GET", url, true);
+		httpReq.send();
+	});
+}
+
+function displayPostList() {
+  //fake function
+}
+
+function displayPhotoList() {
+  //fake function
+}
+
+function getUserData() {
+	return httpGet("/users/12345");
+}
+
+function getBlog(user) {
+	return httpGet("/blogs/" + user.blogId);
+}
+
+function displayBlog(blog) {
+	displayPostList(blog.posts);
+}
+
+function getPhotos(user) {
+	return httpGet("/photos/" + user.albumId);
+}
+
+function displayAlbum(album) {
+	displayPhotoList(album.photos);
+}
+
+function manageError(error) {
+	console.log(error.message);
+}
+
+window.onload = function() {
+  
+  getUserData()
+  	.then(function(user) {
+      var promises = [];
+  		var blog = getBlog(user);
+  		var album = getAlbum(user);
+  
+  		promises.push(blog);
+  		promises.push(photos);
+  		
+      Promise.all(promises)
+      	.then(function(results) {
+      		displayBlog(results[0]);
+      		displayAlbum(results[1]);
+      	});
+  	})
+  	.catch(manageError);  
+};
+</script>
+</head>
+<body>
+
+</body>
+</html>

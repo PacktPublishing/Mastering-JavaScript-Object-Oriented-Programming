@@ -1,0 +1,20 @@
+function Discounter(min, max, discountPercentage, gadget) {
+  this.min = min;
+  this.max = max;
+  this.discountPercentage = discountPercentage;
+  this.gadget = gadget;
+}
+
+Discounter.prototype.isApplicable = function(order) {
+    var itemsCount = order.items.length;
+
+    return (itemsCount >= this.min && itemsCount < this.max)
+};
+
+Discounter.prototype.apply = function(order) {
+    order.totalAmount = order.totalAmount - order.totalAmount * discountPercentage / 100;
+};
+
+Discounter.prototype.addGadget = function(order) {
+	order.items.push(this.gadget);
+}

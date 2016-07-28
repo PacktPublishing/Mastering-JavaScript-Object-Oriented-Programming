@@ -1,0 +1,7 @@
+function TheatreSeats() {
+	var seats = [];
+
+	this.placePerson = function(person) {
+		seats.push(person);
+	};
+}

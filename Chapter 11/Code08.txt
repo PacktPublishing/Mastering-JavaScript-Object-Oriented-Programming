@@ -1,0 +1,76 @@
+function Order(customerId) {
+	this.customerId =  customerId;
+	this.dateTime = new Date();
+	this.totalAmount = 0;
+	this.items = [];
+}
+
+
+var OrderManager = (function () {
+    var discounters = [];
+    
+    function OrderManager() {}
+
+    OrderManager.prototype.createOrder = function (customerId) {
+        this.order = new Order(customerId);
+    };
+
+    OrderManager.prototype.addItem = function (item) {
+        this.order.items.push(item);
+        this.order.totalAmount = this.order.totalAmount + item.price;
+    };
+
+    OrderManager.prototype.sendOrder = function () {
+        if (this.isValid(this.order)) {
+          this.applyDiscount(this.order);
+          var orderSender = new OrderSender();
+          orderSender.send(order);
+        }
+        else {
+            handleError({ message: "Not valid order!" });
+        }
+    };
+
+    OrderManager.prototype.isValid = function (order) {
+        return order.items.length > 0;
+    };
+    
+    OrderManager.prototype.registerDiscounter = function(discounter) {
+      discounters.push(discounter);
+    };
+    
+    OrderManager.prototype.applyDiscount = function (order) {
+        var i;
+        
+        for (i=0; i < discounters.length; i++) {
+          if (discounters[i].isApplicable(order)) {
+            discounters[i].apply(order);
+            break
+          }
+        }
+    };
+
+    return OrderManager;
+}());
+
+var OrderSender = (function() {
+
+  function OrderSender() {}
+  
+  OrderSender.prototype.send = function(order) {
+    var xhr = new XMLHttpRequest();
+    
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        var response = JSON.parse(xhr.responseText);
+        handleResponse(response);
+      }
+    };
+    
+    xhr.open("POST", "/api/orders");
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(JSON.stringify(order));
+  }
+
+  return  OrderSender;
+})();

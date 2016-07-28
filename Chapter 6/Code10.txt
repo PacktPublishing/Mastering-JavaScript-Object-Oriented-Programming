@@ -1,0 +1,52 @@
+var ObjectPool = (function(){
+   var instance;
+	var objConstructor;
+	var objPool = [];
+
+	return class {
+		constructor(objConstr) {
+			if (!instance) {
+			  objConstructor = objConstr;
+				instance = this;
+		}
+
+			return instance;
+		}
+
+		get() {
+			var obj;
+
+			if (objPool.length == 0) {
+				obj = new objConstructor();
+			} else {
+				obj = objPool.pop();
+			}
+
+			return obj;
+		}
+
+		recycle(obj) {
+			objPool.push(obj);
+		}
+    };
+})();
+
+
+class Trainer {
+	explain() {}
+	show() {}
+	exercise() {}
+}
+
+
+var trainerPool = new ObjectPool(Trainer);
+
+var trainer1 = trainerPool.get();
+var trainer2 = trainerPool.get();
+
+trainerPool.recycle(trainer1);
+
+var trainer3 = trainerPool.get();
+
+console.log(trainer1 == trainer2);	//false
+console.log(trainer1 == trainer3);	//true

@@ -1,0 +1,23 @@
+(function() {
+	var pi = 3.14;
+	var export;
+
+	function circumference(radius) {
+		return 2*pi*radius;
+	}
+
+	function circleArea(radius) {
+		return pi*radius*radius;
+	}
+
+	export = {
+		 calculateCircumference:  circumference,
+		 calculateCircleArea:   circleArea
+	};
+
+	if (typeof define === 'function') {
+  		define([], function () {
+    		return export;
+  		});
+	}
+})();

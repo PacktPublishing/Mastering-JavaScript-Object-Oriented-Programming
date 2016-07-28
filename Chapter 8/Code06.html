@@ -1,0 +1,61 @@
+<html>
+<head>
+<script>
+window.onload = function() {
+  var person;
+  var txtName = document.getElementById("txtName");
+  var txtSurname = document.getElementById("txtSurname");
+  
+  function observable(value) {
+    var subscribers = [];
+  
+    function notify(newValue) {
+        for (var i = 0; i < subscribers.length; i++) {
+          subscribers[i](newValue);
+        }
+    }
+  
+    function accessor(newValue) {
+      if (arguments.length && newValue !== value) {
+        value = newValue;
+        notify(newValue);
+      }
+      return value;
+    }
+  
+    accessor.subscribe = function(subscriber) {
+			subscribers.push(subscriber); 
+	 };
+  
+    return accessor;
+  }
+
+  function Person(name, surname) {
+    this.name = name;
+    this.surname = surname;
+  }
+ 
+ 
+  person = new Person(observable("John"), observable("Smith"));
+
+  txtName.value = person.name(); 
+  txtSurname.value = person.surname()
+
+  person.name.subscribe( function(value) { txtName.value = value; });
+  person.surname.subscribe( function(value) { txtSurname.value = value; });
+
+  setTimeout(function() {
+    person.name("Mario");
+    person.surname("Rossi");
+  }, 5000);
+};
+</script>
+</head>
+<body>
+
+<label>Name &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="txtName"></label><br/>
+<label>Surname <input type="text" id="txtSurname"></label><br/>
+<button id="btnSave">Save</button>
+
+</body>
+</html>

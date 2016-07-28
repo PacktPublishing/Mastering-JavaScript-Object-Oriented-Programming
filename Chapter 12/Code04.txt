@@ -1,0 +1,9 @@
+function Calculator() {}
+
+Calculator.prototype.sum = function(x, y) {
+		console.log("Calling sum on " + x + " and " + y);
+		var result =  x + y;
+
+		console.log("Result of sum is " + result);
+		return result;
+	};

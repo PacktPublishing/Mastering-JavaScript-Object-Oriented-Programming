@@ -1,0 +1,23 @@
+<html>
+<head>
+<script>
+function *counter() {
+	yield 1;
+	yield 2;
+	yield 3;
+}
+
+window.onload = function() {
+  var myCounter = counter();
+  
+  console.log(myCounter.next());	//{value: 1, done: false}
+  console.log(myCounter.next());	//{value: 2, done: false}
+  console.log(myCounter.next());	//{value: 3, done: false}
+  console.log(myCounter.next());	//{value: undefined, done: true}
+};
+</script>
+</head>
+<body>
+
+</body>
+</html>

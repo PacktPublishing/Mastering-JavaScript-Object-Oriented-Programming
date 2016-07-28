@@ -1,0 +1,27 @@
+class SoftwareHouse {
+	constructor() {
+		this.employees = [];
+	}
+
+	hire(dev) {
+		if (dev instanceof Person) {
+				this.employees.push(dev);
+		} else {
+			throw new Error("This software house hires only persons!");
+		}
+	}
+
+	createSoftware() {
+		var newSoftware = [];
+		var employee;
+		var module;
+
+		for(var i = 0; i < this.employees.length; i++) {
+			employee = this.employees[i];
+			module =  employee.writeCode();
+			newSoftware.push(module);
+		}
+
+		return newSoftware;
+	}
+}
