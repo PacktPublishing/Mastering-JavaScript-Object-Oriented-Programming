@@ -7,6 +7,6 @@ Most of the code provided in this book is not bound to a specific JavaScript run
 Chapter 1 has no codes.
 
 For more information refer to the following books:
-* [Object-Oriented JavaScript](https://www.packtpub.com/web-development/object-oriented-javascript?utm_source=GitHub&utm_medium=repo&utm_campaign=9781847194145)
-* [Mastering JavaScript Design Patterns](https://www.packtpub.com/application-development/mastering-javascript-design-patterns?utm_source=GitHub&utm_medium=repo&utm_campaign=9781783987986)
-* [Learning Object-Oriented Programming](https://www.packtpub.com/application-development/learning-object-oriented-programming?utm_source=GitHub&utm_medium=repo&utm_campaign=9781785289637)
+* [Object-Oriented JavaScript](https://www.packtpub.com/web-development/object-oriented-javascript?utm_source=GitHub&utm_medium=repository&utm_campaign=9781847194145)
+* [Mastering JavaScript Design Patterns](https://www.packtpub.com/application-development/mastering-javascript-design-patterns?utm_source=GitHub&utm_medium=repository&utm_campaign=9781783987986)
+* [Learning Object-Oriented Programming](https://www.packtpub.com/application-development/learning-object-oriented-programming?utm_source=GitHub&utm_medium=repository&utm_campaign=9781785289637)
