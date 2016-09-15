@@ -1,5 +1,5 @@
 # Mastering-JavaScript-Object-Oriented-Programming
-[Mastering JavaScript Object-Oriented Programming](https://www.packtpub.com/web-development/mastering-javascript-object-oriented-programming?utm_source=GitHub&utm_medium=repo&utm_campaign=9781785889103) by [Packt Publishing](https://www.packtpub.com/)
+[Mastering JavaScript Object-Oriented Programming](https://www.packtpub.com/web-development/mastering-javascript-object-oriented-programming?utm_source=GitHub&utm_medium=repository&utm_campaign=9781785889103) by [Packt Publishing](https://www.packtpub.com/)
 
 
 Most of the code provided in this book is not bound to a specific JavaScript runtime environment, so it could run in any JavaScript environment. However some examples are specific for the Web browser environment, so the console of Web Inspector such as Chrome Developer tools or Firebug is needed.
